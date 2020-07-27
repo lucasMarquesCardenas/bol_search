@@ -1,4 +1,4 @@
-# bemol_drogaria
+# bol_search
 
 A new Flutter project.
 

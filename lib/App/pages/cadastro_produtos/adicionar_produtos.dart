@@ -1,4 +1,4 @@
-import 'package:bemol_drogaria/enums/dropdown_select.dart';
+import 'package:bemol_drogaria/widgets/enums/dropdown_select.dart';
 import 'package:bemol_drogaria/widgets/input_default.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';

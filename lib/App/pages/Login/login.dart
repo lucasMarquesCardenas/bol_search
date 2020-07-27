@@ -1,7 +1,6 @@
 import 'package:bemol_drogaria/App/pages/test/test_page.dart';
-import 'package:bemol_drogaria/Service/Usuario/service_usuario.dart';
 import 'package:bemol_drogaria/Service/service.dart';
-import 'package:bemol_drogaria/global_widget/nav.dart';
+import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/App/pages/Dashboard/dashboard_main.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario.dart';
 import 'package:bemol_drogaria/widgets/button_default.dart';

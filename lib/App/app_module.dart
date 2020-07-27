@@ -11,7 +11,6 @@ import 'package:bemol_drogaria/Service/service.dart';
 import 'package:bemol_drogaria/shared/repositories/user_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends MainModule {
@@ -20,7 +19,7 @@ class AppModule extends MainModule {
         Bind((i) => AppController()),
         Bind((i) => DashboardController()),
         Bind((i) => Dio(BaseOptions(baseUrl: "http://192.168.1.6:5051/"))),
-        Bind((i) => LoginController()),
+        Bind((i) => LoginController(i.get<UserRepository>())),
         Bind((i) => UserRepository(i.get<Dio>())),
         Bind((i) => TestandoController(i.get<UserRepository>())),
       ];
@@ -28,6 +27,14 @@ class AppModule extends MainModule {
   List<Router> get routers => [
         Router(
           '/',
+          child: (context, args) => Login(),
+        ),
+        Router(
+          '/login',
+          child: (context, args) => Login(),
+        ),
+        Router(
+          '/dashboard',
           child: (context, args) => Login(),
         ),
         Router(

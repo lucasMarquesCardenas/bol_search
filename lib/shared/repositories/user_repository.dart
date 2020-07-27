@@ -1,4 +1,4 @@
-import 'package:bemol_drogaria/shared/models/usuario/usuario.dart';
+import 'package:bemol_drogaria/shared/models/usuario.dart';
 import 'package:dio/dio.dart';
 
 class UserRepository {

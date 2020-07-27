@@ -1,5 +1,5 @@
 import 'package:bemol_drogaria/App/pages/Login/login.dart';
-import 'package:bemol_drogaria/global_widget/nav.dart';
+import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/widgets/button_default.dart';
 import 'package:bemol_drogaria/widgets/input_default.dart';
 import 'package:email_validator/email_validator.dart';

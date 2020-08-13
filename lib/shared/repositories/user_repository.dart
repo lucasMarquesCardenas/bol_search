@@ -1,23 +1,30 @@
+import 'dart:convert';
+
 import 'package:bemol_drogaria/shared/models/usuario.dart';
 import 'package:dio/dio.dart';
 
 class UserRepository {
   final Dio dio;
-
   UserRepository(this.dio);
 
   Future<List<UsuarioModel>> getAllUsers() async {
-    var response = await dio.request("/listar_all_users",
+    List<UsuarioModel> convertList = [];
+
+    var response = await dio.request("/listar",
         options: Options(
           headers: {"Content-Type": "application/json"},
         ));
-    List<UsuarioModel> list = [];
-    for (var json in (response.data[0] as List)) {
-      UsuarioModel model = UsuarioModel(email: json['email']);
-      list.add(model);
+
+    if (response.data == null) {
+      print(response.statusCode);
+    } else {
+      final jsonMap = json.decode(response.data);
+      convertList = (jsonMap as List)
+          .map((itensData) => UsuarioModel.fromJson(itensData))
+          .toList();
     }
 
-    return list;
+    return convertList;
   }
 
   Future<List<UsuarioModel>> getOneUser(idUserToken) async {
@@ -27,7 +34,7 @@ class UserRepository {
           headers: {"Content-Type": "application/json"},
         ));
     List<UsuarioModel> list = [];
-    for (var json in (response.data[0] as List)) {
+    for (var json in (response.data as List)) {
       UsuarioModel model = UsuarioModel(email: json['email']);
       list.add(model);
     }
@@ -35,36 +42,44 @@ class UserRepository {
     return list;
   }
 
-  Future<List<UsuarioModel>> loginUsuario(email, senha) async {
-    var response = await dio.request("/login",
-        data: {
-          "email": email,
-          "senha": senha,
-        },
-        options: Options(
-          headers: {"Content-Type": "application/json"},
-        ));
-    List<UsuarioModel> list = [];
-    for (var json in (response.data[0] as List)) {
-      UsuarioModel model = UsuarioModel(email: json['email']);
-      list.add(model);
+  Future<List<UsuarioModel>> loginUsuario(body) async {
+    List<UsuarioModel> convertList = [];
+
+    String _body = json.encode(body);
+
+    var response = await dio.post(
+      "/login",
+      data: _body,
+      options: Options(
+        headers: {"Content-Type": "application/json"},
+      ),
+    );
+
+    if (response.data == null) {
+      print(response.statusCode);
+    } else {
+      final jsonMap = json.decode(response.data);
+      convertList = (jsonMap as List)
+          .map((itensData) => UsuarioModel.fromJson(itensData))
+          .toList();
     }
 
-    return list;
+    return convertList;
   }
 
-  Future<List<UsuarioModel>> cadastrarUsuario() async {
-    var response = await dio.request("/cadastrar_usuario",
-        data: {},
+  Future<List<UsuarioModel>> cadastrarUsuario(body) async {
+    List<UsuarioModel> list = [];
+
+    var _body = json.encode(body);
+
+    var response = await dio.post("/cadastro_usuario",
+        data: _body,
         options: Options(
           headers: {"Content-Type": "application/json"},
         ));
-    List<UsuarioModel> list = [];
-    for (var json in (response.data[0] as List)) {
-      UsuarioModel model = UsuarioModel(email: json['email']);
-      list.add(model);
-    }
 
+    UsuarioModel model = UsuarioModel.fromJson(response.data[0]);
+    list.add(model);
     return list;
   }
 }

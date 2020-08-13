@@ -20,8 +20,9 @@ class ProdutoRepository {
     return list;
   }
 
-  Future<List<ProdutoModel>> getOneProduct() async {
+  Future<List<ProdutoModel>> getOneProduct(idProd) async {
     var response = await dio.request("/listar_produto",
+        data: {"id": idProd},
         options: Options(
           headers: {"Content-Type": "application/json"},
         ));
@@ -35,10 +36,13 @@ class ProdutoRepository {
   }
 
   Future<List<ProdutoModel>> postProducts() async {
-    var response = await dio.request("/cadastrar_produto",
-        options: Options(
-          headers: {"Content-Type": "application/json"},
-        ));
+    var response = await dio.request(
+      "/cadastrar_produto",
+      data: {"id": 12, "name": "wendu"},
+      options: Options(
+        headers: {"Content-Type": "application/json"},
+      ),
+    );
     List<ProdutoModel> list = [];
     for (var json in (response.data[0] as List)) {
       ProdutoModel model = ProdutoModel();

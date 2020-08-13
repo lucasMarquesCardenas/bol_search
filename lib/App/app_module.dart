@@ -5,6 +5,8 @@ import 'package:bemol_drogaria/App/pages/Dashboard/dashboard_main.dart';
 import 'package:bemol_drogaria/App/pages/Dashboard/graficos/dashboard_graficos.dart';
 import 'package:bemol_drogaria/App/pages/Login/login.dart';
 import 'package:bemol_drogaria/App/pages/Login/login_controller.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario_controller.dart';
 import 'package:bemol_drogaria/App/pages/test/test_controller.dart';
 import 'package:bemol_drogaria/App/pages/test/test_page.dart';
 import 'package:bemol_drogaria/Service/service.dart';
@@ -18,8 +20,9 @@ class AppModule extends MainModule {
   List<Bind> get binds => [
         Bind((i) => AppController()),
         Bind((i) => DashboardController()),
-        Bind((i) => Dio(BaseOptions(baseUrl: "http://192.168.1.6:5051/"))),
+        Bind((i) => Dio(BaseOptions(baseUrl: "http://192.168.1.8:5051/"))),
         Bind((i) => LoginController(i.get<UserRepository>())),
+        Bind((i) => CadastroUsuarioController(i.get<UserRepository>())),
         Bind((i) => UserRepository(i.get<Dio>())),
         Bind((i) => TestandoController(i.get<UserRepository>())),
       ];
@@ -34,8 +37,12 @@ class AppModule extends MainModule {
           child: (context, args) => Login(),
         ),
         Router(
+          '/cadastro',
+          child: (context, args) => CadastroUsuario(),
+        ),
+        Router(
           '/dashboard',
-          child: (context, args) => Login(),
+          child: (context, args) => DashboardMain(),
         ),
         Router(
           '/test',

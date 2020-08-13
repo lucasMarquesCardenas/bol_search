@@ -28,6 +28,8 @@ dependencies:
   flutter_modular:
   mobx:
   flutter_mobx:
+  characters: ^1.0.0
+  flutter_form_builder: ^3.13.2
   flutter:
     sdk: flutter
 

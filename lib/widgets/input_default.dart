@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class InputDefault extends StatelessWidget {
   String label;
@@ -9,16 +10,18 @@ class InputDefault extends StatelessWidget {
   double direita;
   double esquerda;
   Icon icon;
-  FormFieldValidator<String> validator;
+  String attributeName;
   TextEditingController controller;
+  List<FormFieldValidator> validator;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
           top: acima, bottom: abaixo, right: direita, left: esquerda),
-      child: TextFormField(
-        validator: validator,
+      child: FormBuilderTextField(
+        attribute: attributeName,
+        validators: validator,
         keyboardType: keyboardType,
         controller: controller,
         decoration: InputDecoration(
@@ -52,7 +55,8 @@ class InputDefault extends StatelessWidget {
     this.direita,
     this.esquerda,
     this.icon,
-    this.validator,
     this.controller,
+    this.attributeName,
+    this.validator,
   });
 }

@@ -1,9 +1,11 @@
 import 'package:bemol_drogaria/App/pages/Login/login.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario_controller.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/widgets/button_default.dart';
 import 'package:bemol_drogaria/widgets/input_default.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class CadastroUsuario extends StatefulWidget {
   @override
@@ -11,7 +13,9 @@ class CadastroUsuario extends StatefulWidget {
 }
 
 class _CadastroUsuario extends State<CadastroUsuario> {
-  final _formKey = GlobalKey<FormState>();
+  final cadastroController = Modular.get<CadastroUsuarioController>();
+
+  final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   var _nomeCompletoController = TextEditingController();
 
@@ -28,14 +32,11 @@ class _CadastroUsuario extends State<CadastroUsuario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cadastro'),
-      ),
       backgroundColor: Colors.lightBlue,
       body: Container(
         padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-        child: Form(
-          key: _formKey,
+        child: FormBuilder(
+          key: _fbKey,
           child: ListView(
             children: <Widget>[
               InputDefault(
@@ -47,13 +48,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.person),
                 controller: _nomeCompletoController,
-                validator: (email) {
-                  if (!EmailValidator.validate(email)) {
-                    return 'E-mail inválido';
-                  }
-
-                  return null;
-                },
+                attributeName: "nomeCompleto",
               ),
               InputDefault(
                 'Nome da mãe',
@@ -64,13 +59,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.person),
                 controller: _nomeMaeController,
-                validator: (nomeMae) {
-                  if (nomeMae.isEmpty) {
-                    return 'Informação não informada!';
-                  }
-
-                  return null;
-                },
+                attributeName: "nomeMae",
               ),
               InputDefault(
                 'Matrícula',
@@ -81,6 +70,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.person),
                 controller: _matriculaController,
+                attributeName: "matricula",
               ),
               InputDefault(
                 'E-mail',
@@ -91,6 +81,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.email),
                 controller: _emailController,
+                attributeName: "email",
               ),
               InputDefault(
                 'Senha',
@@ -101,6 +92,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.dialpad),
                 controller: _senhaController,
+                attributeName: "senha",
               ),
               InputDefault(
                 'Telefone',
@@ -111,6 +103,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.call),
                 controller: _telefoneController,
+                attributeName: "telefone",
               ),
               SizedBox(
                 height: 20,
@@ -121,7 +114,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 largura: 300,
                 corDeTexto: Colors.white,
                 corDoBotao: Colors.blue,
-                onPressed: () => _onCadastro(),
+                onPressed: () => _submit(),
               ),
               SizedBox(
                 height: 20,
@@ -146,11 +139,5 @@ class _CadastroUsuario extends State<CadastroUsuario> {
     );
   }
 
-  void _onCadastro() async {
-    bool _formOk = _formKey.currentState.validate();
-
-    if (!_formOk) {
-      return;
-    }
-  }
+  void _submit() {}
 }

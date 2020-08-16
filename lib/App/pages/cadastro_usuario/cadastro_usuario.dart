@@ -1,5 +1,6 @@
 import 'package:bemol_drogaria/App/pages/Login/login.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario_controller.dart';
+import 'package:bemol_drogaria/App/pages/test/test_page.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/widgets/button_default.dart';
 import 'package:bemol_drogaria/widgets/input_default.dart';
@@ -22,6 +23,8 @@ class _CadastroUsuario extends State<CadastroUsuario> {
   var _nomeMaeController = TextEditingController();
 
   var _matriculaController = TextEditingController();
+
+  var _funcaoController = TextEditingController();
 
   var _emailController = TextEditingController();
 
@@ -72,6 +75,31 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 controller: _matriculaController,
                 attributeName: "matricula",
               ),
+              InputDefault(
+                'Função',
+                'Insira sua função',
+                acima: 10,
+                abaixo: 10,
+                direita: 10,
+                esquerda: 10,
+                icon: Icon(Icons.person),
+                controller: _funcaoController,
+                attributeName: "funcao",
+              ),
+              // FormBuilderDateRangePicker(
+              //   attribute: 'dateNascimento',
+              //   firstDate: DateTime(1970),
+              //   lastDate: DateTime.now(),
+              //   initialValue: [
+              //     DateTime.now().subtract(Duration(days: 30)),
+              //     DateTime.now().subtract(Duration(seconds: 10))
+              //   ],
+              //   decoration: const InputDecoration(
+              //     labelText: 'Date Range',
+              //     helperText: 'Helper text',
+              //     hintText: 'Hint text',
+              //   ),
+              // ),
               InputDefault(
                 'E-mail',
                 'Insira seu e-mail',
@@ -139,5 +167,17 @@ class _CadastroUsuario extends State<CadastroUsuario> {
     );
   }
 
-  void _submit() {}
+  void _submit() {
+    // if (_fbKey.currentState.saveAndValidate()) {
+    //   cadastroController.cadastrar(list: _fbKey.currentState.value);
+
+    //   _fbKey.currentState.reset();
+    //   // push(context, Testando());
+    // }
+    _fbKey.currentState.save();
+    cadastroController.cadastrar(list: _fbKey.currentState.value);
+    push(context, Testando());
+
+    // print(_fbKey.currentState.value);
+  }
 }

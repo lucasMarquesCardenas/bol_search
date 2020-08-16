@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bemol_drogaria/shared/models/produto.dart';
 import 'package:dio/dio.dart';
 
@@ -7,17 +9,24 @@ class ProdutoRepository {
   ProdutoRepository(this.dio);
 
   Future<List<ProdutoModel>> getAllProducts() async {
-    var response = await dio.request("/listar_all_produtos",
+    List<ProdutoModel> convertList = [];
+
+    var response = await dio.request("/listar",
         options: Options(
           headers: {"Content-Type": "application/json"},
         ));
-    List<ProdutoModel> list = [];
-    for (var json in (response.data[0] as List)) {
-      ProdutoModel model = ProdutoModel();
-      list.add(model);
+
+    if (response.data == "") {
+      print(response.statusCode);
+      convertList = null;
+    } else {
+      final jsonMap = json.decode(response.data);
+      convertList = (jsonMap as List)
+          .map((itensData) => ProdutoModel.fromJson(itensData))
+          .toList();
     }
 
-    return list;
+    return convertList;
   }
 
   Future<List<ProdutoModel>> getOneProduct(idProd) async {
@@ -27,10 +36,6 @@ class ProdutoRepository {
           headers: {"Content-Type": "application/json"},
         ));
     List<ProdutoModel> list = [];
-    for (var json in (response.data[0] as List)) {
-      ProdutoModel model = ProdutoModel();
-      list.add(model);
-    }
 
     return list;
   }
@@ -44,10 +49,7 @@ class ProdutoRepository {
       ),
     );
     List<ProdutoModel> list = [];
-    for (var json in (response.data[0] as List)) {
-      ProdutoModel model = ProdutoModel();
-      list.add(model);
-    }
+   
 
     return list;
   }

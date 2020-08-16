@@ -1,6 +1,6 @@
 import 'package:bemol_drogaria/App/pages/Login/login_controller.dart';
+import 'package:bemol_drogaria/App/pages/Login/login_status_page.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
-import 'package:bemol_drogaria/App/pages/Dashboard/dashboard_main.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario.dart';
 import 'package:bemol_drogaria/widgets/button_default.dart';
 import 'package:bemol_drogaria/widgets/input_default.dart';
@@ -112,10 +112,8 @@ class _LoginState extends State<Login> {
   void _submit() {
     if (_fbKey.currentState.saveAndValidate()) {
       loginController.login(list: _fbKey.currentState.value);
+      push(context, LoginStatus());
+      _fbKey.currentState.reset();
     }
-
-    var list = loginController.usuario.value;
-
-    print(list);
   }
 }

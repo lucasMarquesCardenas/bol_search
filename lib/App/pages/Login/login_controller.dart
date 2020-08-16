@@ -9,7 +9,7 @@ abstract class _LoginControllerBase with Store {
   UserRepository repository;
 
   _LoginControllerBase(this.repository) {
-    users();
+    // users();
   }
 
   @observable

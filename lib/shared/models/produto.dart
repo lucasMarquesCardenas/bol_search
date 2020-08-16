@@ -5,7 +5,6 @@ class ProdutoModel {
   int codBemol;
   String codBarras;
   int tipoProduto;
-  String body;
 
   ProdutoModel({
     this.id,
@@ -13,6 +12,14 @@ class ProdutoModel {
     this.subtitulo,
     this.codBemol,
     this.codBarras,
-    this.body,
   });
+
+  ProdutoModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    nomeProduto = json['nomeProduto'];
+    subtitulo = json['subtitulo'];
+    codBemol = json['codBemol'];
+    codBarras = json['codBarras'];
+    tipoProduto = json['tipoProduto'];
+  }
 }

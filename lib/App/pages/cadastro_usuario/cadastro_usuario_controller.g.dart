@@ -28,9 +28,8 @@ mixin _$CadastroUsuarioController on _CadastroUsuarioControllerBase, Store {
       AsyncAction('_CadastroUsuarioControllerBase.cadastrar');
 
   @override
-  Future cadastrar({List<dynamic> listForm}) {
-    return _$cadastrarAsyncAction
-        .run(() => super.cadastrar(listForm: listForm));
+  Future cadastrar({Map<String, dynamic> list}) {
+    return _$cadastrarAsyncAction.run(() => super.cadastrar(list: list));
   }
 
   @override

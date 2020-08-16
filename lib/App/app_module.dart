@@ -20,10 +20,11 @@ class AppModule extends MainModule {
   List<Bind> get binds => [
         Bind((i) => AppController()),
         Bind((i) => DashboardController()),
-        Bind((i) => Dio(BaseOptions(baseUrl: "http://192.168.1.8:5051/"))),
+        Bind((i) => Dio()),
+        Bind((i) => CustomDio(i.get<Dio>())),
         Bind((i) => LoginController(i.get<UserRepository>())),
         Bind((i) => CadastroUsuarioController(i.get<UserRepository>())),
-        Bind((i) => UserRepository(i.get<Dio>())),
+        Bind((i) => UserRepository(i.get<CustomDio>())),
         Bind((i) => TestandoController(i.get<UserRepository>())),
       ];
   @override

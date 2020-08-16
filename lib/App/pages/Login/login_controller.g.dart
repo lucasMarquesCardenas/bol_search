@@ -39,15 +39,19 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  final _$loginAsyncAction = AsyncAction('_LoginControllerBase.login');
-
-  @override
-  Future login({Map<String, dynamic> list}) {
-    return _$loginAsyncAction.run(() => super.login(list: list));
-  }
-
   final _$_LoginControllerBaseActionController =
       ActionController(name: '_LoginControllerBase');
+
+  @override
+  dynamic login({Map<String, dynamic> list}) {
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.login');
+    try {
+      return super.login(list: list);
+    } finally {
+      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic users() {

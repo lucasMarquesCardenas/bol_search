@@ -21,20 +21,11 @@ class Testando extends StatelessWidget {
           return Center(
             child: CircularProgressIndicator(),
           );
-        }else{
-          
+        } else {
+          return Center(
+            child: Text('Você foi cadastrado com sucesso!'),
+          );
         }
-
-        var list = cadastroController.usuario.value;
-
-        return ListView.builder(
-          itemCount: list.length,
-          itemBuilder: (_, int index) {
-            return ListTile(
-              title: Text(list[index].senha),
-            );
-          },
-        );
       }),
     );
   }

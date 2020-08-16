@@ -8,17 +8,11 @@ class CadastroUsuarioController = _CadastroUsuarioControllerBase
 
 abstract class _CadastroUsuarioControllerBase with Store {
   UserRepository repository;
-  _CadastroUsuarioControllerBase(this.repository) {
-    cadastrar();
-  }
+  _CadastroUsuarioControllerBase(this.repository);
   @observable
   ObservableFuture<List<UsuarioModel>> usuario;
   @action
-  cadastrar({List listForm}) async {
-    // try {
-    //   usuario = repository.cadastrarUsuario(listForm).asObservable();
-    // } catch (exception) {
-    //   print('algo deu errado ' + exception);
-    // }
+  cadastrar({Map<String, dynamic> list}) {
+    usuario = repository.cadastrarUsuario(list).asObservable();
   }
 }

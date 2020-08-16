@@ -23,7 +23,8 @@ environment:
 dependencies:
   splashscreen: ^1.2.0
   dropdownfield: ^1.0.3
-  email_validator: '^1.0.0'
+  email_validator: ^1.0.0
+  shared_preferences: ^0.5.8
   dio: ^3.0.9
   flutter_modular:
   mobx:

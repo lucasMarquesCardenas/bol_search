@@ -8,23 +8,26 @@ class LoginController = _LoginControllerBase with _$LoginController;
 abstract class _LoginControllerBase with Store {
   UserRepository repository;
 
-  _LoginControllerBase(this.repository) {
-    // users();
-  }
+  _LoginControllerBase(this.repository);
 
   @observable
   ObservableFuture<List<UsuarioModel>> usuario;
 
   @observable
-  ObservableFuture<List<UsuarioModel>> usuarios;
+  bool checkLogin = false;
 
   @action
   login({Map<String, dynamic> list}) {
     usuario = repository.loginUsuario(list).asObservable();
+    // responseCheck(usuario);
   }
 
   @action
-  users() {
-    usuarios = repository.getAllUsers().asObservable();
+  responseCheck(usuario) {
+    if (usuario == null) {
+      checkLogin = false;
+    } else {
+      checkLogin = true;
+    }
   }
 }

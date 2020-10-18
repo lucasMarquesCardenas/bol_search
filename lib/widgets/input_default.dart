@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class InputDefault extends StatelessWidget {
+class InputDefault extends StatefulWidget {
   String label;
   String hint;
-  TextInputType keyboardType;
   double acima;
   double abaixo;
   double direita;
@@ -15,37 +14,7 @@ class InputDefault extends StatelessWidget {
   List<FormFieldValidator> validator;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-          top: acima, bottom: abaixo, right: direita, left: esquerda),
-      child: FormBuilderTextField(
-        attribute: attributeName,
-        validators: validator,
-        keyboardType: keyboardType,
-        controller: controller,
-        decoration: InputDecoration(
-          fillColor: Colors.white,
-          filled: true,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-          prefixIcon: icon,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(196),
-          ),
-          alignLabelWithHint: true,
-          labelText: label,
-          labelStyle: TextStyle(
-            fontSize: 20,
-            color: Colors.black,
-          ),
-          hintText: hint,
-          hintStyle: TextStyle(
-            fontSize: 16,
-          ),
-        ),
-      ),
-    );
-  }
+  _InputDefaultState createState() => _InputDefaultState();
 
   InputDefault(
     this.label,
@@ -59,4 +28,41 @@ class InputDefault extends StatelessWidget {
     this.attributeName,
     this.validator,
   });
+}
+
+class _InputDefaultState extends State<InputDefault> {
+  TextInputType keyboardType;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+          top: widget.acima, bottom: widget.abaixo, right: widget.direita, left: widget.esquerda),
+      child: FormBuilderTextField(
+        attribute: widget.attributeName,
+        validators: widget.validator,
+        keyboardType: keyboardType,
+        controller: widget.controller,
+        decoration: InputDecoration(
+          fillColor: Colors.white,
+          filled: true,
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          prefixIcon: widget.icon,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(196),
+          ),
+          alignLabelWithHint: true,
+          labelText: widget.label,
+          labelStyle: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+          ),
+          hintText: widget.hint,
+          hintStyle: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
 }

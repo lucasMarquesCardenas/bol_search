@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ButtonDefault extends StatelessWidget {
+class ButtonDefault extends StatefulWidget {
   String label;
   Color corDeTexto;
   Color corDoBotao;
@@ -9,22 +9,7 @@ class ButtonDefault extends StatelessWidget {
   double largura;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: altura,
-      width: largura,
-      child: RaisedButton(
-        child: Text(
-          label,
-          style: TextStyle(
-            color: corDeTexto,
-          ),
-        ),
-        onPressed: onPressed,
-        color: corDoBotao,
-      ),
-    );
-  }
+  _ButtonDefaultState createState() => _ButtonDefaultState();
 
   ButtonDefault(
     this.label, {
@@ -34,4 +19,24 @@ class ButtonDefault extends StatelessWidget {
     this.corDoBotao,
     this.onPressed,
   });
+}
+
+class _ButtonDefaultState extends State<ButtonDefault> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: widget.altura,
+      width: widget.largura,
+      child: RaisedButton(
+        child: Text(
+          widget.label,
+          style: TextStyle(
+            color: widget.corDeTexto,
+          ),
+        ),
+        onPressed: widget.onPressed,
+        color: widget.corDoBotao,
+      ),
+    );
+  }
 }

@@ -49,21 +49,29 @@ class UserRepository {
 
     String _body = json.encode(body);
 
+    print(_body);
+
     try {
       var response = await dio.client.post(
-        "/login",
+        "/users/logar_usuario",
         data: _body,
         options: Options(
           headers: {"Content-Type": "application/json"},
         ),
       );
       print(response.data);
-      final jsonMap = json.decode(response.data);
-      return convertList = (jsonMap as List)
-          .map((itensData) => UsuarioModel.fromJson(itensData))
-          .toList();
-    } on DioError catch (e) {
-      throw (e.message);
+      if (response.data == "") {
+        return null;
+      } else {
+        // UsuarioModel.saveStorageUserInformation(response.data);
+        Map jsonMap = response.data;
+        var list = UsuarioModel.fromJson(jsonMap);
+        convertList.add(list);
+
+        return convertList;
+      }
+    } catch(e) {
+      return null;
     }
   }
 
@@ -73,7 +81,7 @@ class UserRepository {
     String _body = json.encode(body);
 
     var response = await dio.client.post(
-      "/cadastro_usuario",
+      "/users//cadastro_usuario",
       data: _body,
     );
     print(response.data);

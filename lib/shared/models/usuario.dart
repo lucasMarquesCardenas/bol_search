@@ -1,3 +1,5 @@
+import 'package:bemol_drogaria/shared/utils/prefs.dart';
+
 class UsuarioModel {
   int id;
   String nomeCompleto;
@@ -5,17 +7,26 @@ class UsuarioModel {
   int matricula;
   String email;
   String senha;
+  String dataNascimento;
   String telefone;
+  String createdAt;
+  String updateAt;
+  Map cargos;
+  Map status;
 
-  UsuarioModel({
-    this.id,
-    this.nomeCompleto,
-    this.nomeMae,
-    this.matricula,
-    this.email,
-    this.senha,
-    this.telefone,
-  });
+  UsuarioModel(
+      {this.id,
+      this.nomeCompleto,
+      this.nomeMae,
+      this.matricula,
+      this.email,
+      this.senha,
+      this.dataNascimento,
+      this.telefone,
+      this.createdAt,
+      this.updateAt,
+      this.cargos,
+      this.status});
 
   UsuarioModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -24,23 +35,31 @@ class UsuarioModel {
     matricula = json['matricula'];
     email = json['email'];
     senha = json['senha'];
+    dataNascimento = json['dataNascimento'];
     telefone = json['telefone'];
+    createdAt = json['created_At'];
+    updateAt = json['update_At'];
+    cargos = json['cargos'];
+    status = json['status'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['nomeCompleto'] = this.nomeCompleto;
-    data['nomeMae'] = this.nomeMae;
-    data['matricula'] = this.matricula;
-    data['email'] = this.email;
-    data['senha'] = this.senha;
-    data['telefone'] = this.telefone;
-    return data;
+  UsuarioModel.getStorage() {
+    getStorageUserInformation();
   }
 
   @override
   String toString() {
-    return 'UsuarioModel{nomeCompleto: $nomeCompleto, nomeMae: $nomeMae, matricula: $matricula, email: $email, senha: $senha, telefone: $telefone}';
+    return 'UsuarioModel{nomeCompleto: $nomeCompleto, nomeMae: $nomeMae, matricula: $matricula, email: $email, senha: $senha, dataNascimento: $dataNascimento,' 
+    + 'telefone: $telefone, createdAt: $createdAt, updateAt: $updateAt, cargos: $cargos, status: $status}';
+  }
+
+  UsuarioModel.saveStorageUserInformation(json) {
+    Prefs.setString("user.prefs", json);
+    // getStorageUserInformation();
+  }
+
+  Future<String> getStorageUserInformation() async {
+    String json = await Prefs.getString("user.prefs");
+    return json;
   }
 }

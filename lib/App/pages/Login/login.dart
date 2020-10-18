@@ -1,5 +1,7 @@
+import 'package:bemol_drogaria/App/pages/Dashboard/dashboard_main.dart';
 import 'package:bemol_drogaria/App/pages/Login/login_controller.dart';
-import 'package:bemol_drogaria/App/pages/Login/login_status_page.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_produtos/adicionar_produtos.dart';
+import 'package:bemol_drogaria/widgets/codigo_barras/codigo_barras.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario.dart';
 import 'package:bemol_drogaria/widgets/button_default.dart';
@@ -7,6 +9,7 @@ import 'package:bemol_drogaria/widgets/input_default.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -21,6 +24,7 @@ class _LoginState extends State<Login> {
   var _emailController = TextEditingController();
 
   var _senhaController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +77,12 @@ class _LoginState extends State<Login> {
                   'Esqueceu sua senha?',
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
-                onPressed: () => {},
+                onPressed: () => {
+                  push(
+                    context,
+                    AdicionarProdutos(),
+                  )
+                },
               ),
               SizedBox(
                 height: 10,
@@ -112,8 +121,10 @@ class _LoginState extends State<Login> {
   void _submit() {
     if (_fbKey.currentState.saveAndValidate()) {
       loginController.login(list: _fbKey.currentState.value);
-      push(context, LoginStatus());
-      _fbKey.currentState.reset();
+
+      //   // _fbKey.currentState.reset();
     }
+
+    // push(context, DashboardMain());
   }
 }

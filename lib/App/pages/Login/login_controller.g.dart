@@ -24,18 +24,18 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
-  final _$usuariosAtom = Atom(name: '_LoginControllerBase.usuarios');
+  final _$checkLoginAtom = Atom(name: '_LoginControllerBase.checkLogin');
 
   @override
-  ObservableFuture<List<UsuarioModel>> get usuarios {
-    _$usuariosAtom.reportRead();
-    return super.usuarios;
+  bool get checkLogin {
+    _$checkLoginAtom.reportRead();
+    return super.checkLogin;
   }
 
   @override
-  set usuarios(ObservableFuture<List<UsuarioModel>> value) {
-    _$usuariosAtom.reportWrite(value, super.usuarios, () {
-      super.usuarios = value;
+  set checkLogin(bool value) {
+    _$checkLoginAtom.reportWrite(value, super.checkLogin, () {
+      super.checkLogin = value;
     });
   }
 
@@ -54,11 +54,11 @@ mixin _$LoginController on _LoginControllerBase, Store {
   }
 
   @override
-  dynamic users() {
+  dynamic responseCheck(dynamic usuario) {
     final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
-        name: '_LoginControllerBase.users');
+        name: '_LoginControllerBase.responseCheck');
     try {
-      return super.users();
+      return super.responseCheck(usuario);
     } finally {
       _$_LoginControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -68,7 +68,7 @@ mixin _$LoginController on _LoginControllerBase, Store {
   String toString() {
     return '''
 usuario: ${usuario},
-usuarios: ${usuarios}
+checkLogin: ${checkLogin}
     ''';
   }
 }

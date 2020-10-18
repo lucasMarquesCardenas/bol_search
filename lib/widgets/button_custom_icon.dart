@@ -26,6 +26,7 @@ class ButtonCustomIcon extends StatelessWidget {
                 size: 40,
               ),
               FlatButton(
+                onPressed: () {  },
                 child: Text(
                   label,
                   style: TextStyle(
@@ -38,25 +39,6 @@ class ButtonCustomIcon extends StatelessWidget {
           onPressed: onPressed,
         ),
       ),
-
-      // child: Row(
-      //   children: <Widget>[
-      //     Icon(
-      //       Icons.add,
-      //       color: Colors.white,
-      //       size: 40,
-      //     ),
-      //     FlatButton(
-      //       child: Text(
-      //         label,
-      //         style: TextStyle(
-      //           color: corDeTexto,
-      //         ),
-      //       ),
-      //       onPressed: onPressed,
-      //     ),
-      //   ],
-      // ),
     );
   }
 

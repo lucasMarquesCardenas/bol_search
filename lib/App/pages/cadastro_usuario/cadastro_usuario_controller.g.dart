@@ -24,12 +24,18 @@ mixin _$CadastroUsuarioController on _CadastroUsuarioControllerBase, Store {
     });
   }
 
-  final _$cadastrarAsyncAction =
-      AsyncAction('_CadastroUsuarioControllerBase.cadastrar');
+  final _$_CadastroUsuarioControllerBaseActionController =
+      ActionController(name: '_CadastroUsuarioControllerBase');
 
   @override
-  Future cadastrar({Map<String, dynamic> list}) {
-    return _$cadastrarAsyncAction.run(() => super.cadastrar(list: list));
+  dynamic cadastrar({Map<String, dynamic> list}) {
+    final _$actionInfo = _$_CadastroUsuarioControllerBaseActionController
+        .startAction(name: '_CadastroUsuarioControllerBase.cadastrar');
+    try {
+      return super.cadastrar(list: list);
+    } finally {
+      _$_CadastroUsuarioControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

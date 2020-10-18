@@ -1,9 +1,7 @@
-import 'dart:io';
-
 import 'package:bemol_drogaria/Service/response/interceptors.dart';
 import 'package:dio/dio.dart';
 
-const BASE_URL = "http://192.168.1.14:5051";
+const BASE_URL = "http://192.168.1.9:3000";
 
 class CustomDio {
   final Dio client;
@@ -11,6 +9,8 @@ class CustomDio {
   CustomDio(this.client) {
     client.options.baseUrl = BASE_URL;
     client.interceptors.add(ServiceIntercept());
-    client.options.connectTimeout = 5000;
+    client.options.connectTimeout = 15000;
+    client.options.receiveTimeout = 10000;
+    client.options.responseType = ResponseType.json;
   }
 }

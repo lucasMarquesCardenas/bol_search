@@ -1,6 +1,5 @@
 import 'package:bemol_drogaria/App/pages/Login/login.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario_controller.dart';
-import 'package:bemol_drogaria/App/pages/test/test_page.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/widgets/button_default.dart';
 import 'package:bemol_drogaria/widgets/input_default.dart';
@@ -176,7 +175,6 @@ class _CadastroUsuario extends State<CadastroUsuario> {
     // }
     _fbKey.currentState.save();
     cadastroController.cadastrar(list: _fbKey.currentState.value);
-    push(context, Testando());
 
     // print(_fbKey.currentState.value);
   }

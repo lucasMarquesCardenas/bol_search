@@ -1,8 +1,8 @@
 import 'package:bemol_drogaria/App/pages/Login/login.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario_controller.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
-import 'package:bemol_drogaria/widgets/button_default.dart';
-import 'package:bemol_drogaria/widgets/input_default.dart';
+import 'package:bemol_drogaria/widgets/buttons/button_default.dart';
+import 'package:bemol_drogaria/widgets/inputs/input_default.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -25,6 +25,8 @@ class _CadastroUsuario extends State<CadastroUsuario> {
 
   var _funcaoController = TextEditingController();
 
+  var _dataNascimentoController = TextEditingController();
+
   var _emailController = TextEditingController();
 
   var _senhaController = TextEditingController();
@@ -42,7 +44,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
           child: ListView(
             children: <Widget>[
               InputDefault(
-                'Nome',
+                'Nome completo',
                 'Insira seu nome completo',
                 acima: 10,
                 abaixo: 10,
@@ -59,7 +61,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 abaixo: 10,
                 direita: 10,
                 esquerda: 10,
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.face),
                 controller: _nomeMaeController,
                 attributeName: "nomeMae",
               ),
@@ -70,7 +72,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 abaixo: 10,
                 direita: 10,
                 esquerda: 10,
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.assignment_ind),
                 controller: _matriculaController,
                 attributeName: "matricula",
               ),
@@ -87,7 +89,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
               ),
               // FormBuilderDateRangePicker(
               //   attribute: 'dateNascimento',
-              //   firstDate: DateTime(1970),
+              //   firstDate: DateTime(1997),
               //   lastDate: DateTime.now(),
               //   initialValue: [
               //     DateTime.now().subtract(Duration(days: 30)),
@@ -97,8 +99,19 @@ class _CadastroUsuario extends State<CadastroUsuario> {
               //     labelText: 'Date Range',
               //     helperText: 'Helper text',
               //     hintText: 'Hint text',
-              //   ),
+              //   ), format: null,
               // ),
+              InputDefault(
+                'Data de nascimento',
+                'Insira sua data de nascimento',
+                acima: 10,
+                abaixo: 10,
+                direita: 10,
+                esquerda: 10,
+                icon: Icon(Icons.date_range),
+                controller: _dataNascimentoController,
+                attributeName: "dataNascimento",
+              ),
               InputDefault(
                 'E-mail',
                 'Insira seu e-mail',

@@ -19,15 +19,6 @@ abstract class _LoginControllerBase with Store {
   @action
   login({Map<String, dynamic> list}) {
     usuario = repository.loginUsuario(list).asObservable();
-    // responseCheck(usuario);
   }
 
-  @action
-  responseCheck(usuario) {
-    if (usuario == null) {
-      checkLogin = false;
-    } else {
-      checkLogin = true;
-    }
-  }
 }

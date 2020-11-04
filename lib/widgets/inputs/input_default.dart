@@ -37,7 +37,10 @@ class _InputDefaultState extends State<InputDefault> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-          top: widget.acima, bottom: widget.abaixo, right: widget.direita, left: widget.esquerda),
+          top: widget.acima,
+          bottom: widget.abaixo,
+          right: widget.direita,
+          left: widget.esquerda),
       child: FormBuilderTextField(
         attribute: widget.attributeName,
         validators: widget.validator,
@@ -54,12 +57,12 @@ class _InputDefaultState extends State<InputDefault> {
           alignLabelWithHint: true,
           labelText: widget.label,
           labelStyle: TextStyle(
-            fontSize: 20,
+            fontSize: 14,
             color: Colors.black,
           ),
           hintText: widget.hint,
           hintStyle: TextStyle(
-            fontSize: 16,
+            fontSize: 14,
           ),
         ),
       ),

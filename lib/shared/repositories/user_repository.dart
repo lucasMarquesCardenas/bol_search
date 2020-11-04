@@ -49,8 +49,6 @@ class UserRepository {
 
     String _body = json.encode(body);
 
-    print(_body);
-
     try {
       var response = await dio.client.post(
         "/users/logar_usuario",
@@ -70,7 +68,7 @@ class UserRepository {
 
         return convertList;
       }
-    } catch(e) {
+    } catch (e) {
       return null;
     }
   }
@@ -80,20 +78,26 @@ class UserRepository {
 
     String _body = json.encode(body);
 
-    var response = await dio.client.post(
-      "/users//cadastro_usuario",
-      data: _body,
-    );
-    print(response.data);
-    if (response.data == "") {
-      print(response.statusCode);
-      convertList = null;
-    } else {
-      final jsonMap = json.decode(response.data);
-      print(jsonMap);
-      convertList.add(jsonMap);
-    }
+    try {
+      var response = await dio.client.post(
+        "/users/cadastro_usuario",
+        data: _body,
+        options: Options(
+          headers: {"Content-Type": "application/json"},
+        ),
+      );
 
-    return convertList;
+      if (response.data == "") {
+        return null;
+      } else {
+        Map jsonMap = response.data;
+        var list = UsuarioModel.fromJson(jsonMap);
+        convertList.add(list);
+
+        return convertList;
+      }
+    } catch (e) {
+      return null;
+    }
   }
 }

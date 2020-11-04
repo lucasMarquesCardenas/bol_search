@@ -1,5 +1,6 @@
 import 'package:bemol_drogaria/App/app_controller.dart';
 import 'package:bemol_drogaria/App/app_main.dart';
+import 'package:bemol_drogaria/App/pages/Dashboard/dashboard.dart';
 import 'package:bemol_drogaria/App/pages/Dashboard/dashboard_controller.dart';
 import 'package:bemol_drogaria/App/pages/Dashboard/dashboard_main.dart';
 import 'package:bemol_drogaria/App/pages/Login/login.dart';
@@ -11,6 +12,7 @@ import 'package:bemol_drogaria/Service/service.dart';
 import 'package:bemol_drogaria/shared/repositories/produto_repository.dart';
 import 'package:bemol_drogaria/shared/repositories/user_repository.dart';
 import 'package:bemol_drogaria/widgets/codigo_barras/codigo_barras.dart';
+import 'package:bemol_drogaria/widgets/drawer/drawer_custom.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -44,7 +46,11 @@ class AppModule extends MainModule {
         ),
         Router(
           '/dashboard',
-          child: (context, args) => DashboardMain(),
+          child: (context, args) => Dashboard(),
+        ),
+        Router(
+          '/drawer',
+          child: (context, args) => DrawerCustom(),
         ),
         Router(
           '/codigo_barras',

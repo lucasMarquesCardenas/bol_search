@@ -13,12 +13,12 @@ class DrawerList extends StatelessWidget {
           child: Icon(
             icone,
             size: 30,
-            color: Colors.blue[600],
+            color: Colors.white,
           ),
         ),
         Text(
           texto,
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: 14, color: Colors.white),
         ),
       ],
     );

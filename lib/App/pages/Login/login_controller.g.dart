@@ -54,17 +54,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
   }
 
   @override
-  dynamic responseCheck(dynamic usuario) {
-    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
-        name: '_LoginControllerBase.responseCheck');
-    try {
-      return super.responseCheck(usuario);
-    } finally {
-      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 usuario: ${usuario},

@@ -1,4 +1,4 @@
-import 'package:bemol_drogaria/global_widget/splash_screen.dart';
+import 'package:bemol_drogaria/widgets/global_widget/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

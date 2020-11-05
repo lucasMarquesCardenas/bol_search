@@ -1,9 +1,11 @@
 import 'package:bemol_drogaria/App/pages/Login/login.dart';
-import 'package:bemol_drogaria/global_widget/nav.dart';
-import 'package:bemol_drogaria/widgets/button_default.dart';
-import 'package:bemol_drogaria/widgets/input_default.dart';
-import 'package:email_validator/email_validator.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario_controller.dart';
+import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
+import 'package:bemol_drogaria/widgets/buttons/button_default.dart';
+import 'package:bemol_drogaria/widgets/inputs/input_default.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class CadastroUsuario extends StatefulWidget {
   @override
@@ -11,13 +13,19 @@ class CadastroUsuario extends StatefulWidget {
 }
 
 class _CadastroUsuario extends State<CadastroUsuario> {
-  final _formKey = GlobalKey<FormState>();
+  final cadastroController = Modular.get<CadastroUsuarioController>();
+
+  final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   var _nomeCompletoController = TextEditingController();
 
   var _nomeMaeController = TextEditingController();
 
   var _matriculaController = TextEditingController();
+
+  var _funcaoController = TextEditingController();
+
+  var _dataNascimentoController = TextEditingController();
 
   var _emailController = TextEditingController();
 
@@ -28,18 +36,15 @@ class _CadastroUsuario extends State<CadastroUsuario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cadastro'),
-      ),
       backgroundColor: Colors.lightBlue,
       body: Container(
         padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-        child: Form(
-          key: _formKey,
+        child: FormBuilder(
+          key: _fbKey,
           child: ListView(
             children: <Widget>[
               InputDefault(
-                'Nome',
+                'Nome completo',
                 'Insira seu nome completo',
                 acima: 10,
                 abaixo: 10,
@@ -47,13 +52,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.person),
                 controller: _nomeCompletoController,
-                validator: (email) {
-                  if (!EmailValidator.validate(email)) {
-                    return 'E-mail inválido';
-                  }
-
-                  return null;
-                },
+                attributeName: "nomeCompleto",
               ),
               InputDefault(
                 'Nome da mãe',
@@ -62,15 +61,9 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 abaixo: 10,
                 direita: 10,
                 esquerda: 10,
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.face),
                 controller: _nomeMaeController,
-                validator: (nomeMae) {
-                  if (nomeMae.isEmpty) {
-                    return 'Informação não informada!';
-                  }
-
-                  return null;
-                },
+                attributeName: "nomeMae",
               ),
               InputDefault(
                 'Matrícula',
@@ -79,8 +72,45 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 abaixo: 10,
                 direita: 10,
                 esquerda: 10,
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.assignment_ind),
                 controller: _matriculaController,
+                attributeName: "matricula",
+              ),
+              InputDefault(
+                'Função',
+                'Insira sua função',
+                acima: 10,
+                abaixo: 10,
+                direita: 10,
+                esquerda: 10,
+                icon: Icon(Icons.person),
+                controller: _funcaoController,
+                attributeName: "funcao",
+              ),
+              // FormBuilderDateRangePicker(
+              //   attribute: 'dateNascimento',
+              //   firstDate: DateTime(1997),
+              //   lastDate: DateTime.now(),
+              //   initialValue: [
+              //     DateTime.now().subtract(Duration(days: 30)),
+              //     DateTime.now().subtract(Duration(seconds: 10))
+              //   ],
+              //   decoration: const InputDecoration(
+              //     labelText: 'Date Range',
+              //     helperText: 'Helper text',
+              //     hintText: 'Hint text',
+              //   ), format: null,
+              // ),
+              InputDefault(
+                'Data de nascimento',
+                'Insira sua data de nascimento',
+                acima: 10,
+                abaixo: 10,
+                direita: 10,
+                esquerda: 10,
+                icon: Icon(Icons.date_range),
+                controller: _dataNascimentoController,
+                attributeName: "dataNascimento",
               ),
               InputDefault(
                 'E-mail',
@@ -91,6 +121,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.email),
                 controller: _emailController,
+                attributeName: "email",
               ),
               InputDefault(
                 'Senha',
@@ -101,6 +132,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.dialpad),
                 controller: _senhaController,
+                attributeName: "senha",
               ),
               InputDefault(
                 'Telefone',
@@ -111,6 +143,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
                 icon: Icon(Icons.call),
                 controller: _telefoneController,
+                attributeName: "telefone",
               ),
               SizedBox(
                 height: 20,
@@ -121,7 +154,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 largura: 300,
                 corDeTexto: Colors.white,
                 corDoBotao: Colors.blue,
-                onPressed: () => _onCadastro(),
+                onPressed: () => _submit(),
               ),
               SizedBox(
                 height: 20,
@@ -146,11 +179,16 @@ class _CadastroUsuario extends State<CadastroUsuario> {
     );
   }
 
-  void _onCadastro() async {
-    bool _formOk = _formKey.currentState.validate();
+  void _submit() {
+    // if (_fbKey.currentState.saveAndValidate()) {
+    //   cadastroController.cadastrar(list: _fbKey.currentState.value);
 
-    if (!_formOk) {
-      return;
-    }
+    //   _fbKey.currentState.reset();
+    //   // push(context, Testando());
+    // }
+    _fbKey.currentState.save();
+    cadastroController.cadastrar(list: _fbKey.currentState.value);
+
+    // print(_fbKey.currentState.value);
   }
 }

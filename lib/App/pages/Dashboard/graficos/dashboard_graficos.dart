@@ -4,7 +4,6 @@ class DashboardGraficos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _screenHeigth = MediaQuery.of(context).size.height;
-    double _screenWidth = MediaQuery.of(context).size.width;
 
     return Positioned(
       top: 0,

@@ -4,12 +4,25 @@ class BuscaProdutos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Busca de produtos'),
-      ),
-      body: Container(
-        child: ListView(
-          children: <Widget>[],
+      body: NestedScrollView(
+        headerSliverBuilder: (context, condition) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 300,
+              floating: true,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.asset(
+                  'images/busca.jpg',
+                  fit: BoxFit.cover,
+                ),
+                centerTitle: true,
+                title: Text('Consultar produtos'),
+              ),
+            ),
+          ];
+        },
+        body: Stack(
+          children: [],
         ),
       ),
     );

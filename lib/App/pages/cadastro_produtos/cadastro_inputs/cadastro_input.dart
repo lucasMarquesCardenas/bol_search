@@ -1,8 +1,10 @@
 import 'package:bemol_drogaria/widgets/buttons/button_default.dart';
-import 'package:bemol_drogaria/widgets/codigo_barras/codigo_barras.dart';
 import 'package:bemol_drogaria/widgets/inputs/input_default.dart';
+import 'package:bemol_drogaria/widgets/inputs/input_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_produtos/cadastro_produtos_controller.dart';
 
 class CadastroInputs extends StatefulWidget {
   @override
@@ -10,13 +12,13 @@ class CadastroInputs extends StatefulWidget {
 }
 
 class _CadastroInputsState extends State<CadastroInputs> {
+  final cadastroProdutoController = Modular.get<CadastroProdutoController>();
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
   final nomeProduto = TextEditingController();
   final subTitulo = TextEditingController();
   final codBemol = TextEditingController();
   final codBarras = TextEditingController();
   final tipoProduto = TextEditingController();
-  var genderOptions = ['Male', 'Female', 'Other'];
 
   @override
   Widget build(BuildContext context) {
@@ -83,52 +85,84 @@ class _CadastroInputsState extends State<CadastroInputs> {
             attributeName: 'codBemol',
             icon: Icon(Icons.format_list_numbered),
           ),
-          CodigoBarras(),
-          InputDefault(
-            'Código de barras',
-            'Insira o código de barras',
+          // InputDefault(
+          //   'Código de barras',
+          //   'Insira o código de barras',
+          //   acima: 10,
+          //   abaixo: 10,
+          //   direita: 10,
+          //   esquerda: 10,
+          //   controller: codBarras,
+          //   attributeName: 'codBarras',
+          //   icon: Icon(Icons.view_column),
+          // ),
+          InputDropDown(
+            'tipoProduto',
+            'Tipo de produto',
             acima: 10,
             abaixo: 10,
             direita: 10,
             esquerda: 10,
-            controller: codBarras,
-            attributeName: 'codBarras',
-          ),
-          FormBuilderDropdown(
-            attribute: 'coluna',
-            hint: Text('Select Gender'),
-            validators: [
+            dataOptions: ['Remédio'],
+            icon: Icon(Icons.view_column),
+            validator: [
               FormBuilderValidators.required(),
             ],
-            items: genderOptions
-                .map((gender) => DropdownMenuItem(
-                      value: gender,
-                      child: Text('$gender'),
-                    ))
-                .toList(),
-            allowClear: true,
+          ),
+          InputDropDown(
+            'rua',
+            'Rua',
+            acima: 10,
+            abaixo: 10,
+            direita: 10,
+            esquerda: 10,
+            dataOptions: ['Remédio'],
+            icon: Icon(Icons.streetview),
+            validator: [
+              FormBuilderValidators.required(),
+            ],
+          ),
+          InputDropDown(
+            'prateleira',
+            'Prateleira',
+            acima: 10,
+            abaixo: 10,
+            direita: 10,
+            esquerda: 10,
+            dataOptions: ['Remédio'],
+            icon: Icon(Icons.view_stream),
+            validator: [
+              FormBuilderValidators.required(),
+            ],
           ),
           SizedBox(
             height: 20,
           ),
-          ButtonDefault(
-            'Confirmar cadastro',
-            altura: 50,
-            largura: 300,
-            corDeTexto: Colors.white,
-            corDoBotao: Colors.blue,
-            onPressed: () => _submitForm(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ButtonDefault(
-            'Cancelar cadastro',
-            altura: 50,
-            largura: 300,
-            corDeTexto: Colors.white,
-            corDoBotao: Colors.red,
-            onPressed: () => _submitForm(),
+          Column(
+            children: [
+              ButtonDefault(
+                'Confirmar cadastro',
+                altura: 50,
+                largura: 300,
+                corDeTexto: Colors.white,
+                corDoBotao: Colors.blue,
+                onPressed: () => _submitForm(),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ButtonDefault(
+                'Cancelar cadastro',
+                altura: 50,
+                largura: 300,
+                corDeTexto: Colors.white,
+                corDoBotao: Colors.red,
+                onPressed: () => {},
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
           ),
         ],
       ),
@@ -137,6 +171,7 @@ class _CadastroInputsState extends State<CadastroInputs> {
 
   void _submitForm() {
     if (_fbKey.currentState.saveAndValidate()) {
+      cadastroProdutoController.cadastraProduto(formlist: _fbKey.currentState.value);
       // _fbKey.currentState.reset();
     }
   }

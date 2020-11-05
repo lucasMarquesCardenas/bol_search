@@ -1,6 +1,7 @@
 import 'dart:ui';
 
-import 'package:bemol_drogaria/App/pages/cadastro_produtos/adicionar_produtos.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_produtos/cadastro_produtos.dart';
+import 'package:bemol_drogaria/App/pages/busca_produtos/busca_produtos.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +49,7 @@ class _DashboardFuncoesState extends State<DashboardFuncoes> {
                     ],
                   ),
                 ),
-                onPressed: () => {},
+                onPressed: () => {push(context, BuscaProdutos())},
               ),
               FlatButton(
                 child: Container(

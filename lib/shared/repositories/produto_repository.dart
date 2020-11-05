@@ -40,17 +40,32 @@ class ProdutoRepository {
     return list;
   }
 
-  Future<List<ProdutoModel>> postProducts() async {
-    // var response = await dio.request(
-    //   "/cadastrar_produto",
-    //   data: {"id": 12, "name": "wendu"},
-    //   options: Options(
-    //     headers: {"Content-Type": "application/json"},
-    //   ),
-    // );
-    List<ProdutoModel> list = [];
-   
+  Future<List<ProdutoModel>> cadastrarProduto(body) async {
+     List<ProdutoModel> convertList = [];
 
-    return list;
+    String _body = json.encode(body);
+
+    try {
+      var response = await dio.client.post(
+        "/produtos/logar_usuario",
+        data: _body,
+        options: Options(
+          headers: {"Content-Type": "application/json"},
+        ),
+      );
+      print(response.data);
+      if (response.data == "") {
+        return null;
+      } else {
+        Map jsonMap = response.data;
+        var list = ProdutoModel.fromJson(jsonMap);
+        convertList.add(list);
+
+        return convertList;
+      }
+    } catch (e) {
+      return null;
+    }
+   
   }
 }

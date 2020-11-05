@@ -1,6 +1,4 @@
-import 'package:bemol_drogaria/app/pages/Dashboard/graficos/dashboard_graficos.dart';
 import 'package:flutter/material.dart';
-
 import 'dashboard_funcoes.dart';
 
 class DashboardMain extends StatefulWidget {
@@ -12,11 +10,8 @@ class _DashboardMainState extends State<DashboardMain> {
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   double x = 0;
-
   double y = 0;
-
   double scale = 1;
-
   bool openDrawer = false;
 
   @override

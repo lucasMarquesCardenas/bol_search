@@ -1,7 +1,6 @@
-import 'package:bemol_drogaria/App/pages/cadastro_produtos/adicionar_produtos_controller.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_produtos/cadastro_produtos_controller.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_produtos/cadastro_inputs/cadastro_input.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AdicionarProdutos extends StatefulWidget {
@@ -11,8 +10,6 @@ class AdicionarProdutos extends StatefulWidget {
 
 class _AdicionarProdutosState extends State<AdicionarProdutos> {
   final cadastroProdutoController = Modular.get<CadastroProdutoController>();
-
-  final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {

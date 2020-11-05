@@ -2,16 +2,16 @@ import 'package:bemol_drogaria/App/app_controller.dart';
 import 'package:bemol_drogaria/App/app_main.dart';
 import 'package:bemol_drogaria/App/pages/Dashboard/dashboard.dart';
 import 'package:bemol_drogaria/App/pages/Dashboard/dashboard_controller.dart';
-import 'package:bemol_drogaria/App/pages/Dashboard/dashboard_main.dart';
 import 'package:bemol_drogaria/App/pages/Login/login.dart';
 import 'package:bemol_drogaria/App/pages/Login/login_controller.dart';
-import 'package:bemol_drogaria/App/pages/cadastro_produtos/adicionar_produtos_controller.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_produtos/cadastro_produtos_controller.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario_controller.dart';
 import 'package:bemol_drogaria/Service/service.dart';
 import 'package:bemol_drogaria/shared/repositories/produto_repository.dart';
 import 'package:bemol_drogaria/shared/repositories/user_repository.dart';
 import 'package:bemol_drogaria/widgets/codigo_barras/codigo_barras.dart';
+import 'package:bemol_drogaria/widgets/codigo_barras/codigo_barras_controller.dart';
 import 'package:bemol_drogaria/widgets/drawer/drawer_custom.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -27,32 +27,33 @@ class AppModule extends MainModule {
         Bind((i) => LoginController(i.get<UserRepository>())),
         Bind((i) => CadastroUsuarioController(i.get<UserRepository>())),
         Bind((i) => CadastroProdutoController(i.get<ProdutoRepository>())),
+        Bind((i) => CodigoBarrasController()),
         Bind((i) => UserRepository(i.get<CustomDio>())),
         Bind((i) => ProdutoRepository(i.get<CustomDio>())),
       ];
   @override
-  List<Router> get routers => [
-        Router(
+  List<ModularRouter> get routers => [
+        ModularRouter(
           '/',
-          child: (context, args) => Login(),
+          child: (context, args) => Dashboard(),
         ),
-        Router(
+        ModularRouter(
           '/login',
           child: (context, args) => Login(),
         ),
-        Router(
+        ModularRouter(
           '/cadastro',
           child: (context, args) => CadastroUsuario(),
         ),
-        Router(
+        ModularRouter(
           '/dashboard',
           child: (context, args) => Dashboard(),
         ),
-        Router(
+        ModularRouter(
           '/drawer',
           child: (context, args) => DrawerCustom(),
         ),
-        Router(
+        ModularRouter(
           '/codigo_barras',
           child: (context, args) => CodigoBarras(),
         ),

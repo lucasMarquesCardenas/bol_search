@@ -30,7 +30,7 @@ dependencies:
   flutter_mobx:
   characters: ^1.0.0
   flutter_form_builder: ^3.13.2
-  flutter_barcode_scanner: ^1.0.1
+  flutter_barcode_scanner: ^1.0.0
   flutter:
     sdk: flutter
 

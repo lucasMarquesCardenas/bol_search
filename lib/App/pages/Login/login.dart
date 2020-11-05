@@ -1,6 +1,6 @@
 import 'package:bemol_drogaria/App/pages/Dashboard/dashboard.dart';
 import 'package:bemol_drogaria/App/pages/Login/login_controller.dart';
-import 'package:bemol_drogaria/App/pages/cadastro_produtos/adicionar_produtos.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_produtos/cadastro_produtos.dart';
 import 'package:bemol_drogaria/widgets/buttons/button_default.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario.dart';
@@ -53,7 +53,7 @@ class _LoginState extends State<Login> {
               InputDefault(
                 'E-mail',
                 'Insira seu e-mail',
-                acima: 60,
+                acima: 40,
                 abaixo: 10,
                 direita: 10,
                 esquerda: 10,
@@ -120,7 +120,10 @@ class _LoginState extends State<Login> {
                     CadastroUsuario(),
                   )
                 },
-              )
+              ),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),

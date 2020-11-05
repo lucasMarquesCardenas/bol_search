@@ -3,7 +3,7 @@ class ProdutoModel {
   String nomeProduto;
   String subtitulo;
   int codBemol;
-  String codBarras;
+  int codBarras;
   int tipoProduto;
 
   ProdutoModel({

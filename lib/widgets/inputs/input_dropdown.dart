@@ -2,38 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 // ignore: must_be_immutable
-class InputDefault extends StatefulWidget {
-  String label;
-  String hint;
+class InputDropDown extends StatefulWidget {
+  @override
+  _InputDropDownState createState() => _InputDropDownState();
+  String attributeName;
+  String title;
   double acima;
   double abaixo;
   double direita;
   double esquerda;
   Icon icon;
-  String attributeName;
-  TextEditingController controller;
+  List dataOptions = [];
   List<FormFieldValidator> validator;
 
-  @override
-  _InputDefaultState createState() => _InputDefaultState();
-
-  InputDefault(
-    this.label,
-    this.hint, {
+  InputDropDown(
+    this.attributeName,
+    this.title, {
     this.acima,
     this.abaixo,
     this.direita,
     this.esquerda,
-    this.icon,
-    this.controller,
-    this.attributeName,
+    this.dataOptions,
     this.validator,
+    this.icon,
   });
 }
 
-class _InputDefaultState extends State<InputDefault> {
-  TextInputType keyboardType;
-
+class _InputDropDownState extends State<InputDropDown> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,11 +37,18 @@ class _InputDefaultState extends State<InputDefault> {
           bottom: widget.abaixo,
           right: widget.direita,
           left: widget.esquerda),
-      child: FormBuilderTextField(
+      child: FormBuilderDropdown(
+        isExpanded: true,
         attribute: widget.attributeName,
+        hint: Text(widget.title),
         validators: widget.validator,
-        keyboardType: keyboardType,
-        controller: widget.controller,
+        items: widget.dataOptions
+            .map((data) => DropdownMenuItem(
+                  value: data,
+                  child: Text('$data'),
+                ))
+            .toList(),
+        allowClear: true,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,
@@ -56,14 +58,10 @@ class _InputDefaultState extends State<InputDefault> {
             borderRadius: BorderRadius.circular(196),
           ),
           alignLabelWithHint: true,
-          labelText: widget.label,
+          // labelText: widget.label,
           labelStyle: TextStyle(
             fontSize: 14,
             color: Colors.black,
-          ),
-          hintText: widget.hint,
-          hintStyle: TextStyle(
-            fontSize: 14,
           ),
         ),
       ),

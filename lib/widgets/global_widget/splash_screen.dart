@@ -1,4 +1,4 @@
-import 'package:bemol_drogaria/app/pages/Login/login.dart';
+import 'package:bemol_drogaria/App/pages/Login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -9,6 +9,7 @@ class SplashScreenAddOn extends StatelessWidget {
       child: new SplashScreen(
         seconds: 7,
         navigateAfterSeconds: new Login(),
+        routeName: '/login',
         title: new Text(
           'Escolha com Confiança',
           style: new TextStyle(

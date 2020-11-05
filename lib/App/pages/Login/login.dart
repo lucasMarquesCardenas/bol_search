@@ -1,14 +1,14 @@
-import 'package:bemol_drogaria/App/pages/test/test_page.dart';
-import 'package:bemol_drogaria/Service/Usuario/service_usuario.dart';
-import 'package:bemol_drogaria/Service/service.dart';
-import 'package:bemol_drogaria/global_widget/nav.dart';
-import 'package:bemol_drogaria/App/pages/Dashboard/dashboard_main.dart';
+import 'package:bemol_drogaria/App/pages/Dashboard/dashboard.dart';
+import 'package:bemol_drogaria/App/pages/Login/login_controller.dart';
+import 'package:bemol_drogaria/App/pages/cadastro_produtos/cadastro_produtos.dart';
+import 'package:bemol_drogaria/widgets/buttons/button_default.dart';
+import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario.dart';
-import 'package:bemol_drogaria/widgets/button_default.dart';
-import 'package:bemol_drogaria/widgets/input_default.dart';
-import 'package:dio/dio.dart';
+import 'package:bemol_drogaria/widgets/inputs/input_default.dart';
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -16,11 +16,25 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _formKey = GlobalKey<FormState>();
+  final loginController = Modular.get<LoginController>();
+
+  final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
   var _emailController = TextEditingController();
 
   var _senhaController = TextEditingController();
+
+  @override
+  void initState() {
+    when((res) => loginController.usuario.value != null,
+        () => {push(context, Dashboard())});
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +42,8 @@ class _LoginState extends State<Login> {
       backgroundColor: Colors.lightBlue,
       body: Container(
         padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-        child: Form(
-          key: _formKey,
+        child: FormBuilder(
+          key: _fbKey,
           child: ListView(
             children: <Widget>[
               Image.asset(
@@ -39,19 +53,19 @@ class _LoginState extends State<Login> {
               InputDefault(
                 'E-mail',
                 'Insira seu e-mail',
-                acima: 60,
+                acima: 40,
                 abaixo: 10,
                 direita: 10,
                 esquerda: 10,
                 icon: Icon(Icons.email),
                 controller: _emailController,
-                validator: (email) {
-                  if (!EmailValidator.validate(email)) {
-                    return 'E-mail inválido';
-                  }
-
-                  return null;
-                },
+                attributeName: 'email',
+                validator: [
+                  FormBuilderValidators.email(
+                      errorText: 'Por favor! insira um e-mail valido.'),
+                  FormBuilderValidators.required(
+                      errorText: 'Campo está vazio! por favor preencher.'),
+                ],
               ),
               InputDefault(
                 'Senha',
@@ -62,27 +76,35 @@ class _LoginState extends State<Login> {
                 esquerda: 10,
                 icon: Icon(Icons.dialpad),
                 controller: _senhaController,
+                attributeName: 'senha',
+                validator: [
+                  FormBuilderValidators.required(
+                      errorText: 'Campo está vazio! por favor preencher.'),
+                ],
               ),
               FlatButton(
                 child: Text(
                   'Esqueceu sua senha?',
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
-                onPressed: () => {},
+                onPressed: () => {
+                  push(
+                    context,
+                    AdicionarProdutos(),
+                  )
+                },
               ),
               SizedBox(
                 height: 10,
               ),
-              ButtonDefault('Entrar',
-                  altura: 50,
-                  largura: 300,
-                  corDeTexto: Colors.white,
-                  corDoBotao: Colors.blue,
-                  onPressed: () => push(
-                        context,
-                        DashboardMain(),
-                        replace: true,
-                      )),
+              ButtonDefault(
+                'Entrar',
+                altura: 50,
+                largura: 300,
+                corDeTexto: Colors.white,
+                corDoBotao: Colors.blue,
+                onPressed: () => _submitForm(),
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -98,7 +120,10 @@ class _LoginState extends State<Login> {
                     CadastroUsuario(),
                   )
                 },
-              )
+              ),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
@@ -106,23 +131,13 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void _onLogin() async {
-    bool _formOk = _formKey.currentState.validate();
+  void _submitForm() {
+    if (_fbKey.currentState.saveAndValidate()) {
+      loginController.login(list: _fbKey.currentState.value);
 
-    if (!_formOk) {
-      return;
+      //   // _fbKey.currentState.reset();
     }
 
-    String email = _emailController.text;
-    String senha = _senhaController.text;
-
-    print(email);
-    print(senha);
-
-    push(
-      context,
-      Testando(),
-      replace: true,
-    );
+    // push(context, Dashboard());
   }
 }

@@ -22,12 +22,15 @@ environment:
 
 dependencies:
   splashscreen: ^1.2.0
-  dropdownfield: ^1.0.3
-  email_validator: '^1.0.0'
+  email_validator: ^1.0.0
+  shared_preferences: ^0.5.8
   dio: ^3.0.9
   flutter_modular:
   mobx:
   flutter_mobx:
+  characters: ^1.0.0
+  flutter_form_builder: ^3.13.2
+  flutter_barcode_scanner: ^1.0.0
   flutter:
     sdk: flutter
 

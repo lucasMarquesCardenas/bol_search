@@ -1,8 +1,10 @@
-import 'package:bemol_drogaria/App/pages/Login/login.dart';
-import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario_controller.dart';
+import 'package:bemol_drogaria/App/pages/cadastros/cadastro_usuarios/cadastro_usuario_controller.dart';
+import 'package:bemol_drogaria/App/pages/usuario/login/login.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/widgets/buttons/button_default.dart';
 import 'package:bemol_drogaria/widgets/inputs/input_default.dart';
+import 'package:bemol_drogaria/widgets/inputs/input_phone.dart';
+import 'package:bemol_drogaria/widgets/inputs/input_radio_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -43,6 +45,11 @@ class _CadastroUsuario extends State<CadastroUsuario> {
           key: _fbKey,
           child: ListView(
             children: <Widget>[
+              Padding(padding: EdgeInsets.only(left: 20)),
+              CircleAvatar(
+                backgroundImage: AssetImage('images/user-profile.png'),
+              ),
+              Padding(padding: EdgeInsets.only(left: 20)),
               InputDefault(
                 'Nome completo',
                 'Insira seu nome completo',
@@ -87,20 +94,6 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 controller: _funcaoController,
                 attributeName: "funcao",
               ),
-              // FormBuilderDateRangePicker(
-              //   attribute: 'dateNascimento',
-              //   firstDate: DateTime(1997),
-              //   lastDate: DateTime.now(),
-              //   initialValue: [
-              //     DateTime.now().subtract(Duration(days: 30)),
-              //     DateTime.now().subtract(Duration(seconds: 10))
-              //   ],
-              //   decoration: const InputDecoration(
-              //     labelText: 'Date Range',
-              //     helperText: 'Helper text',
-              //     hintText: 'Hint text',
-              //   ), format: null,
-              // ),
               InputDefault(
                 'Data de nascimento',
                 'Insira sua data de nascimento',
@@ -127,24 +120,49 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 'Senha',
                 'Insira sua senha',
                 acima: 10,
-                abaixo: 20,
+                abaixo: 10,
                 direita: 10,
                 esquerda: 10,
                 icon: Icon(Icons.dialpad),
                 controller: _senhaController,
                 attributeName: "senha",
               ),
-              InputDefault(
-                'Telefone',
-                'Insira seu número de telefone',
+              InputPhone(
+                controller: _telefoneController,
                 acima: 10,
                 abaixo: 10,
                 direita: 10,
                 esquerda: 10,
-                icon: Icon(Icons.call),
-                controller: _telefoneController,
-                attributeName: "telefone",
               ),
+              InputRadioGroup(),
+              // FormBuilderCheckbox(
+              //   attribute: 'accept_terms',
+              //   initialValue: false,
+              //   leadingInput: true,
+              //   label: RichText(
+              //     text: TextSpan(
+              //       children: [
+              //         TextSpan(
+              //             text: 'Eu li e aceito os ',
+              //             style: TextStyle(color: Colors.black)),
+              //         TextSpan(
+              //           text: 'Termos e condições',
+              //           style: TextStyle(color: Colors.white),
+              //           recognizer: TapGestureRecognizer()
+              //             ..onTap = () {
+              //               print('launch url');
+              //             },
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              //   validators: [
+              //     FormBuilderValidators.requiredTrue(
+              //       errorText:
+              //           'You must accept terms and conditions to continue',
+              //     ),
+              //   ],
+              // ),
               SizedBox(
                 height: 20,
               ),

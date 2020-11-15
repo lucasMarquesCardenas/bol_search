@@ -6,4 +6,10 @@ class CodigoBarrasController = _CodigoBarrasControllerBase
 
 abstract class _CodigoBarrasControllerBase with Store {
   _CodigoBarrasControllerBase();
+
+  @observable
+  String codigobarras = '';
+
+  @action
+  setCode(String value) => codigobarras = value;
 }

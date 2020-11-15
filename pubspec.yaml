@@ -30,7 +30,9 @@ dependencies:
   flutter_mobx:
   characters: ^1.0.0
   flutter_form_builder: ^3.13.2
-  flutter_barcode_scanner: ^1.0.0
+  barras: ^0.0.2
+  flutter_beep: ^0.2.0
+  audioplayers: ^0.16.2
   flutter:
     sdk: flutter
 
@@ -60,6 +62,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/
+    - assets/audio/beep_barcode.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

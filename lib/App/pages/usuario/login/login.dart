@@ -1,9 +1,8 @@
 import 'package:bemol_drogaria/App/pages/Dashboard/dashboard.dart';
-import 'package:bemol_drogaria/App/pages/Login/login_controller.dart';
-import 'package:bemol_drogaria/App/pages/cadastro_produtos/cadastro_produtos.dart';
+import 'package:bemol_drogaria/App/pages/cadastros/cadastro_usuarios/cadastro_usuario.dart';
+import 'package:bemol_drogaria/App/pages/usuario/login/login_controller.dart';
 import 'package:bemol_drogaria/widgets/buttons/button_default.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
-import 'package:bemol_drogaria/App/pages/cadastro_usuario/cadastro_usuario.dart';
 import 'package:bemol_drogaria/widgets/inputs/input_default.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -90,7 +89,7 @@ class _LoginState extends State<Login> {
                 onPressed: () => {
                   push(
                     context,
-                    AdicionarProdutos(),
+                    Dashboard(),
                   )
                 },
               ),
@@ -135,9 +134,7 @@ class _LoginState extends State<Login> {
     if (_fbKey.currentState.saveAndValidate()) {
       loginController.login(list: _fbKey.currentState.value);
 
-      //   // _fbKey.currentState.reset();
+      _fbKey.currentState.reset();
     }
-
-    // push(context, Dashboard());
   }
 }

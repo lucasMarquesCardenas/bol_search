@@ -1,4 +1,4 @@
-import 'package:bemol_drogaria/App/pages/Login/login.dart';
+import 'package:bemol_drogaria/App/pages/usuario/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 

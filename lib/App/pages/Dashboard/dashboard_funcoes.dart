@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:bemol_drogaria/App/pages/cadastro_produtos/cadastro_produtos.dart';
-import 'package:bemol_drogaria/App/pages/busca_produtos/busca_produtos.dart';
+import 'package:bemol_drogaria/App/pages/buscas/busca_produtos/busca_produtos.dart';
+import 'package:bemol_drogaria/App/pages/cadastros/cadastro_produtos/cadastro_produtos.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:flutter/material.dart';
 

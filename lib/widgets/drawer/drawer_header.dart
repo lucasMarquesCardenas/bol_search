@@ -15,7 +15,9 @@ class _DrawerHeaderDefaultState extends State<DrawerHeaderDefault> {
     return Row(
       children: [
         Padding(padding: EdgeInsets.only(left: 20)),
-        CircleAvatar(backgroundImage: AssetImage('images/user-profile.png'),),
+        CircleAvatar(
+          backgroundImage: AssetImage('images/user-profile.png'),
+        ),
         Padding(padding: EdgeInsets.only(left: 20)),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

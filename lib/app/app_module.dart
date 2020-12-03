@@ -8,8 +8,8 @@ import 'package:bemol_drogaria/App/pages/cadastros/cadastro_usuarios/cadastro_us
 import 'package:bemol_drogaria/App/pages/usuario/login/login.dart';
 import 'package:bemol_drogaria/App/pages/usuario/login/login_controller.dart';
 import 'package:bemol_drogaria/Service/service.dart';
-import 'package:bemol_drogaria/shared/repositories/produto_repository.dart';
-import 'package:bemol_drogaria/shared/repositories/user_repository.dart';
+import 'package:bemol_drogaria/shared/repositories/produto.dart';
+import 'package:bemol_drogaria/shared/repositories/usuario.dart';
 import 'package:bemol_drogaria/widgets/codigo_barras/codigo_barras_controller.dart';
 import 'package:bemol_drogaria/widgets/drawer/drawer_custom.dart';
 import 'package:dio/dio.dart';
@@ -24,7 +24,7 @@ class AppModule extends MainModule {
         Bind((i) => Dio()),
         Bind((i) => CustomDio(i.get<Dio>())),
         Bind((i) => LoginController(i.get<UserRepository>())),
-        Bind((i) => CadastroUsuarioController(i.get<UserRepository>())),
+        Bind((i) => CadastroUsuarioController(i.get<UserRepository>(),)),
         Bind((i) => CadastroProdutoController(i.get<ProdutoRepository>())),
         Bind((i) => CodigoBarrasController()),
         Bind((i) => UserRepository(i.get<CustomDio>())),

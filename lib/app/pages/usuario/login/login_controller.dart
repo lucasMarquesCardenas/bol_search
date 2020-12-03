@@ -1,5 +1,5 @@
 import 'package:bemol_drogaria/shared/models/usuario.dart';
-import 'package:bemol_drogaria/shared/repositories/user_repository.dart';
+import 'package:bemol_drogaria/shared/repositories/usuario.dart';
 import 'package:mobx/mobx.dart';
 part 'login_controller.g.dart';
 
@@ -20,5 +20,4 @@ abstract class _LoginControllerBase with Store {
   login({Map<String, dynamic> list}) {
     usuario = repository.loginUsuario(list).asObservable();
   }
-
 }

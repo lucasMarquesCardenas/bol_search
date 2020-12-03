@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:bemol_drogaria/App/pages/buscas/busca_produtos/busca_produtos.dart';
 import 'package:bemol_drogaria/App/pages/cadastros/cadastro_produtos/cadastro_produtos.dart';
+import 'package:bemol_drogaria/widgets/buttons/button_dashboard.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:flutter/material.dart';
 
@@ -14,145 +13,98 @@ class _DashboardFuncoesState extends State<DashboardFuncoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Row(
-            children: [
-              FlatButton(
-                child: Container(
-                  height: 130,
-                  width: 140,
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.blue[800],
-                          Colors.blue[700],
-                          Colors.blue[300],
-                          Colors.blue[300],
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(50)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Buscar produtos',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                onPressed: () => {push(context, BuscaProdutos())},
-              ),
-              FlatButton(
-                child: Container(
-                  height: 150,
-                  width: 150,
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.red[800],
-                          Colors.red[700],
-                          Colors.red[300],
-                          Colors.red[300],
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(50)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add_a_photo,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'cadastrar produtos',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                onPressed: () {
-                  push(context, AdicionarProdutos());
-                },
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Container(
-                height: 150,
-                width: 150,
-                margin: EdgeInsets.fromLTRB(20, 10, 10, 0),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blue[800],
-                        Colors.blue[700],
-                        Colors.blue[300],
-                        Colors.blue[300],
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(50)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.assignment,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Relatórios',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white),
-                    ),
+      body: Container(
+        padding: EdgeInsets.only(top: 50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ButtonDashboard(
+                  altura: 120,
+                  largura: 130,
+                  cores: [
+                    Colors.blue[800],
+                    Colors.blue[700],
+                    Colors.blue[300],
+                    Colors.blue[300],
                   ],
+                  icon: Icons.search,
+                  nomeButton: 'Buscar \n produtos',
+                  onPressed: () => {
+                    push(
+                      context,
+                      BuscaProdutos(),
+                    )
+                  },
                 ),
-              ),
-              Container(
-                height: 150,
-                width: 150,
-                margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.red[800],
-                        Colors.red[700],
-                        Colors.red[300],
-                        Colors.red[300],
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(50)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.location_searching,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Logs',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white),
-                    ),
+                ButtonDashboard(
+                  altura: 120,
+                  largura: 130,
+                  cores: [
+                    Colors.red[800],
+                    Colors.red[700],
+                    Colors.red[300],
+                    Colors.red[300],
                   ],
+                  icon: Icons.add_a_photo,
+                  nomeButton: 'Cadastrar \n produtos',
+                  onPressed: () => {
+                    push(
+                      context,
+                      AdicionarProdutos(),
+                    )
+                  },
                 ),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ButtonDashboard(
+                    altura: 120,
+                    largura: 130,
+                    cores: [
+                      Colors.red[800],
+                      Colors.red[700],
+                      Colors.red[300],
+                      Colors.red[300],
+                    ],
+                    icon: Icons.assignment,
+                    nomeButton: 'Relatórios',
+                    onPressed: () => {
+                      push(
+                        context,
+                        AdicionarProdutos(),
+                      )
+                    },
+                  ),
+                  ButtonDashboard(
+                    altura: 120,
+                    largura: 130,
+                    cores: [
+                      Colors.red[800],
+                      Colors.red[700],
+                      Colors.red[300],
+                      Colors.red[300],
+                    ],
+                    icon: Icons.location_searching,
+                    nomeButton: 'Logs',
+                    onPressed: () => {
+                      push(
+                        context,
+                        AdicionarProdutos(),
+                      )
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

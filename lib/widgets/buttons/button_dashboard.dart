@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -15,34 +17,49 @@ class ButtonDashboard extends StatelessWidget {
     this.cores,
     this.nomeButton,
     this.icon,
-    this.onPressed
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      color: Colors.blueAccent,
+      textColor: Colors.white,
+      splashColor: Colors.red,
+      colorBrightness: Brightness.light,
       child: Container(
         height: altura,
         width: largura,
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: cores,
-            ),
-            borderRadius: BorderRadius.circular(50)),
+        margin: EdgeInsets.only(top: 40),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 40,
-              color: Colors.white,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  size: 40,
+                  color: Colors.white,
+                ),
+              ],
             ),
-            Text(
-              nomeButton,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: Text(
+                    nomeButton,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

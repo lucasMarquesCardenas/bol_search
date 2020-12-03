@@ -3,6 +3,7 @@ import 'package:bemol_drogaria/App/pages/usuario/login/login.dart';
 import 'package:bemol_drogaria/widgets/global_widget/nav.dart';
 import 'package:bemol_drogaria/widgets/buttons/button_default.dart';
 import 'package:bemol_drogaria/widgets/inputs/input_default.dart';
+import 'package:bemol_drogaria/widgets/inputs/input_dropdown.dart';
 import 'package:bemol_drogaria/widgets/inputs/input_phone.dart';
 import 'package:bemol_drogaria/widgets/inputs/input_radio_group.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _CadastroUsuario extends State<CadastroUsuario> {
 
   var _matriculaController = TextEditingController();
 
-  var _funcaoController = TextEditingController();
+  var _cargoController = TextEditingController();
 
   var _dataNascimentoController = TextEditingController();
 
@@ -84,16 +85,17 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 attributeName: "matricula",
               ),
               InputDefault(
-                'Função',
-                'Insira sua função',
+                'Cargo',
+                'Insira seu cargo',
                 acima: 10,
                 abaixo: 10,
                 direita: 10,
                 esquerda: 10,
                 icon: Icon(Icons.person),
-                controller: _funcaoController,
-                attributeName: "funcao",
+                controller: _cargoController,
+                attributeName: "cargo",
               ),
+              InputDropDown('Cargo', 'Insira seu cargo'),
               InputDefault(
                 'Data de nascimento',
                 'Insira sua data de nascimento',
@@ -135,34 +137,6 @@ class _CadastroUsuario extends State<CadastroUsuario> {
                 esquerda: 10,
               ),
               InputRadioGroup(),
-              // FormBuilderCheckbox(
-              //   attribute: 'accept_terms',
-              //   initialValue: false,
-              //   leadingInput: true,
-              //   label: RichText(
-              //     text: TextSpan(
-              //       children: [
-              //         TextSpan(
-              //             text: 'Eu li e aceito os ',
-              //             style: TextStyle(color: Colors.black)),
-              //         TextSpan(
-              //           text: 'Termos e condições',
-              //           style: TextStyle(color: Colors.white),
-              //           recognizer: TapGestureRecognizer()
-              //             ..onTap = () {
-              //               print('launch url');
-              //             },
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              //   validators: [
-              //     FormBuilderValidators.requiredTrue(
-              //       errorText:
-              //           'You must accept terms and conditions to continue',
-              //     ),
-              //   ],
-              // ),
               SizedBox(
                 height: 20,
               ),

@@ -8,7 +8,7 @@ abstract class _CodigoBarrasControllerBase with Store {
   _CodigoBarrasControllerBase();
 
   @observable
-  String codigobarras = '';
+  String codigobarras = '0000000000';
 
   @action
   setCode(String value) => codigobarras = value;

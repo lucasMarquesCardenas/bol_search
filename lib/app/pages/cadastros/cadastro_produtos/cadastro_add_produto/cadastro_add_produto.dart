@@ -101,6 +101,19 @@ class _CadastroAddProdutoState extends State<CadastroAddProduto> {
                 ],
               ),
               InputDropDown(
+                'unidadeMedida',
+                'Unidade de medida',
+                acima: 10,
+                abaixo: 10,
+                direita: 10,
+                esquerda: 10,
+                dataOptions: ['Remédio'],
+                icon: Icon(Icons.house),
+                validator: [
+                  FormBuilderValidators.required(),
+                ],
+              ),
+              InputDropDown(
                 'unidade',
                 'Unidade',
                 acima: 10,
@@ -161,7 +174,9 @@ class _CadastroAddProdutoState extends State<CadastroAddProduto> {
                     largura: 300,
                     corDeTexto: Colors.white,
                     corDoBotao: Colors.red,
-                    onPressed: () => {},
+                    onPressed: () => {
+                      Navigator.of(context).pop(),
+                    },
                   ),
                   SizedBox(
                     height: 20,

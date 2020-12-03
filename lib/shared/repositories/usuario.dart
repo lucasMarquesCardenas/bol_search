@@ -34,7 +34,7 @@ class UserRepository {
         data: {"token": idUserToken},
         options: Options(
           headers: {"Content-Type": "application/json"},
-        ));
+        ));                                                                                                                                                                                      
     List<UsuarioModel> list = [];
     for (var json in (response.data as List)) {
       UsuarioModel model = UsuarioModel(email: json['email']);

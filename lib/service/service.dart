@@ -1,7 +1,7 @@
 import 'package:bemol_drogaria/Service/response/interceptors.dart';
 import 'package:dio/dio.dart';
 
-const BASE_URL = "http://192.168.1.5:3000";
+const BASE_URL = "http://192.168.1.7:3000";
 
 class CustomDio {
   final Dio client;

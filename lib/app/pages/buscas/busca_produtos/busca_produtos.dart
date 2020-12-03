@@ -1,3 +1,4 @@
+import 'package:bemol_drogaria/app/pages/buscas/busca_produtos/busca_produto_card.dart';
 import 'package:flutter/material.dart';
 
 class BuscaProdutos extends StatelessWidget {
@@ -22,7 +23,9 @@ class BuscaProdutos extends StatelessWidget {
           ];
         },
         body: Stack(
-          children: [],
+          children: [
+            BuscaProdutoCard(),
+          ],
         ),
       ),
     );

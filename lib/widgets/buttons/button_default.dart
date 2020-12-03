@@ -8,6 +8,7 @@ class ButtonDefault extends StatefulWidget {
   Function onPressed;
   double altura;
   double largura;
+  IconData icon;
 
   @override
   _ButtonDefaultState createState() => _ButtonDefaultState();
@@ -19,6 +20,7 @@ class ButtonDefault extends StatefulWidget {
     this.corDeTexto,
     this.corDoBotao,
     this.onPressed,
+    this.icon,
   });
 }
 
@@ -29,11 +31,20 @@ class _ButtonDefaultState extends State<ButtonDefault> {
       height: widget.altura,
       width: widget.largura,
       child: RaisedButton(
-        child: Text(
-          widget.label,
-          style: TextStyle(
-            color: widget.corDeTexto,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              widget.label,
+              style: TextStyle(
+                color: widget.corDeTexto,
+              ),
+            ),
+            Icon(
+              widget.icon,
+              color: Colors.white,
+            ),
+          ],
         ),
         onPressed: widget.onPressed,
         color: widget.corDoBotao,
